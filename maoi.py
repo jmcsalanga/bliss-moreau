@@ -70,7 +70,7 @@ for fn in sys.argv[1:]:                     # command-line functionality
             aoi_dicts_list.append(aoi_dict)
             cnt_ += 1
 
-    csv_f = sys.argv[file_num].split(".")[0] + ".csv"                       # csv file created is "aoi_file_(number of the file on command line).csv"
+    csv_f = sys.argv[file_num].split(".")[0] + ".csv"                       # csv file created is "(name of input file).csv"
     open(csv_f, "a").close()
     
     with open(csv_f, "w") as myfile:
@@ -83,7 +83,7 @@ for fn in sys.argv[1:]:                     # command-line functionality
         
         for aoi1, aoi2 in zip(aoi_dicts_list, aoi_dicts_list[1:]):
             common_keys = set(aoi1.keys()) & set(aoi2.keys())
-            for key in sorted(common_keys):                                 # keys in ascending numeral order
+            for key in sorted(common_keys):                                 # keys in ascending numeric order
                 wr.writerow([key, aoi1[key][0][0], aoi1[key][0][1],
                          aoi1[key][1:]])
                 wr.writerow([key, aoi2[key][0][0], aoi2[key][0][1],

@@ -1,2 +1,2 @@
 # bml-practice
-Program graphing AOIs (Areas of interest) denoted by coordinates onto a screen. 
+Includes programs completed for the Bliss-Moreau Lab. 

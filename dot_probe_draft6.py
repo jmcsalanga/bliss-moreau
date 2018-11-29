@@ -76,7 +76,7 @@ text = visual.TextStim(win=win, name='text',
 
 # Initialize components for Routine "fixation"
 fixationClock = core.Clock()
-polygon_2 = visual.Circle(win=win, radius=35, units='pix',lineWidth=1, 
+fixationPoint = visual.Circle(win=win, radius=35, units='pix',lineWidth=1, 
     lineColor=[-1,-1,-1], fillColor=[1,1,1], fillColorSpace='rgb',
     opacity=1, depth=0.0, interpolate=True)
 mouse = event.Mouse(win=win)
@@ -128,11 +128,6 @@ delay_text = visual.TextStim(win=win, name='delay_text',
     languageStyle='LTR',
     depth=0.0);
 
-# Initialize components for Routine "fixation_1"
-fixation_1Clock = core.Clock()
-polygon_3 = visual.Circle(win=win, radius=25, units='pix',lineWidth=1, 
-    lineColor=[-1,-1,-1], fillColor=[1,1,1], fillColorSpace='rgb',
-    opacity=1, depth=0.0, interpolate=True)
 
 # Initialize components for Routine "end"
 endClock = core.Clock()
@@ -227,92 +222,6 @@ thisExp.nextEntry()
 # the Routine "instructions" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
-# ------Prepare to start Routine "fixation"-------
-t = 0
-fixationStart = 0.0
-totalFixationTime = 0.0
-fixationClock.reset()  # clock
-frameN = -1
-continueRoutine = True
-# update component parameters for each repeat
-# setup some python lists for storing info about the mouse
-gotValidClick = False  # until a click is received
-# keep track of which components have finished
-fixationComponents = [polygon_2, mouse, msg]
-for thisComponent in fixationComponents:
-    if hasattr(thisComponent, 'status'):
-        thisComponent.status = NOT_STARTED
-
-# -------Start Routine "fixation"-------
-while continueRoutine:
-    # get current time
-    t = fixationClock.getTime()
-    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-    # update/draw components on each frame
-    
-    # *polygon_2* updates
-    if t >= 0.0 and polygon_2.status == NOT_STARTED:
-        # keep track of start time/frame for later
-        polygon_2.tStart = t
-        polygon_2.frameNStart = frameN  # exact frame index
-        polygon_2.setAutoDraw(True)
-    
-    if t >= 0.0 and msg.status == NOT_STARTED:
-        # keep track of start time/frame for later
-        msg.tStart = t
-        msg.frameNStart = frameN  # exact frame index
-        msg.setAutoDraw(True)
-    
-    # check if all components have finished
-    if not continueRoutine:  # a component has requested a forced-end of Routine
-        break
-    continueRoutine = False  # will revert to True if at least one component still running
-    for thisComponent in fixationComponents:
-        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-            continueRoutine = True
-            break  # at least one component has not yet finished
-    
-    # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
-        core.quit()
-    
-    # refresh the screen
-    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-        win.flip()
-        
-    if polygon_2.contains(mouse) and fixationStart == 0.0:
-        fixationStart = fixationClock.getTime()
-        msg.text = 'inside %1.1f' % totalFixationTime
-    elif polygon_2.contains(mouse) and fixationStart > 0.0:
-        msg.text = 'inside %1.1f' % totalFixationTime
-        totalFixationTime = fixationClock.getTime() - fixationStart
-        if totalFixationTime >= 1.0:
-            continueRoutine = False
-    elif not polygon_2.contains(mouse):
-        fixationStart == 0.0
-        totalFixationTime = 0.0
-        fixationClock.reset()  # clock
-        msg.text = 'outside %1.1f' % totalFixationTime
-    
-    
-# -------Ending Routine "fixation"-------
-for thisComponent in fixationComponents:
-    if hasattr(thisComponent, "setAutoDraw"):
-        thisComponent.setAutoDraw(False)
-# store data for thisExp (ExperimentHandler)
-x, y = mouse.getPos()
-buttons = mouse.getPressed()
-mouse.time = mouse.mouseClock.getTime()
-thisExp.addData('mouse.x', x)
-thisExp.addData('mouse.y', y)
-thisExp.addData('mouse.leftButton', buttons[0])
-thisExp.addData('mouse.midButton', buttons[1])
-thisExp.addData('mouse.rightButton', buttons[2])
-thisExp.addData('mouse.time', mouse.time)
-thisExp.nextEntry()
-# the Routine "fixation" was not non-slip safe, so reset the non-slip timer
-routineTimer.reset()
-
 # set up handler to look after randomisation of conditions etc
 trials = data.TrialHandler(nReps=1, method='random', 
     extraInfo=expInfo, originPath=-1,
@@ -332,6 +241,95 @@ for thisTrial in trials:
         for paramName in thisTrial:
             exec('{} = thisTrial[paramName]'.format(paramName))
     
+    # ------Prepare to start Routine "fixation"-------
+    t = 0
+    fixationStart = 0.0
+    totalFixationTime = 0.0
+    fixationClock.reset()  # clock
+    frameN = -1
+    continueRoutine = True
+    # update component parameters for each repeat
+    # setup some python lists for storing info about the mouse
+    gotValidClick = False  # until a click is received
+    # keep track of which components have finished
+    fixationComponents = [fixationPoint, mouse, msg]
+    for thisComponent in fixationComponents:
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+
+    # -------Start Routine "fixation"-------
+    while continueRoutine:
+        # get current time
+        t = fixationClock.getTime()
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *fixationPoint* updates
+        if t >= 0.0 and fixationPoint.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            fixationPoint.tStart = t
+            fixationPoint.frameNStart = frameN  # exact frame index
+            fixationPoint.setAutoDraw(True)
+        
+        if t >= 0.0 and msg.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            msg.tStart = t
+            msg.frameNStart = frameN  # exact frame index
+            msg.setAutoDraw(True)
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in fixationComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # check for quit (the Esc key)
+        if endExpNow or event.getKeys(keyList=["escape"]):
+            core.quit()
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+            
+        if fixationPoint.contains(mouse) and fixationStart == 0.0:
+            fixationStart = fixationClock.getTime()
+            #msg.text = 'inside %1.1f' % totalFixationTime
+        elif fixationPoint.contains(mouse) and fixationStart > 0.0:
+            #msg.text = 'inside %1.1f' % totalFixationTime
+            totalFixationTime = fixationClock.getTime() - fixationStart
+            if totalFixationTime >= 1.0:
+                continueRoutine = False
+                fixationStart == 0.0
+                totalFixationTime = 0.0
+                fixationClock.reset()
+        elif not fixationPoint.contains(mouse):
+            fixationStart == 0.0
+            totalFixationTime = 0.0
+            fixationClock.reset()  # clock
+            #msg.text = 'outside %1.1f' % totalFixationTime
+        
+        
+    # -------Ending Routine "fixation"-------
+    for thisComponent in fixationComponents:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # store data for thisExp (ExperimentHandler)
+    x, y = mouse.getPos()
+    buttons = mouse.getPressed()
+    mouse.time = mouse.mouseClock.getTime()
+    thisExp.addData('mouse.x', x)
+    thisExp.addData('mouse.y', y)
+    thisExp.addData('mouse.leftButton', buttons[0])
+    thisExp.addData('mouse.midButton', buttons[1])
+    thisExp.addData('mouse.rightButton', buttons[2])
+    thisExp.addData('mouse.time', mouse.time)
+    thisExp.nextEntry()
+    # the Routine "fixation" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
+
     # ------Prepare to start Routine "trial"-------
     t = 0
     fixationStart = 0.0
@@ -422,6 +420,9 @@ for thisTrial in trials:
             totalFixationTime = fixationClock.getTime() - fixationStart
             if totalFixationTime >= 1.0:
                 continueRoutine = False
+                fixationStart == 0.0
+                totalFixationTime = 0.0
+                fixationClock.reset()
         elif not polygon.contains(mouse):
             fixationStart == 0.0
             totalFixationTime = 0.0
@@ -449,7 +450,7 @@ for thisTrial in trials:
     delayClock.reset()  # clock
     frameN = -1
     continueRoutine = True
-    routineTimer.add(0.500000)
+    routineTimer.add(.500000)
     # update component parameters for each repeat
     # keep track of which components have finished
     delayComponents = [delay_text]
@@ -496,60 +497,7 @@ for thisTrial in trials:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     
-    # ------Prepare to start Routine "fixation_1"-------
-    t = 0
-    fixation_1Clock.reset()  # clock
-    frameN = -1
-    continueRoutine = True
-    routineTimer.add(0.500000)
-    # update component parameters for each repeat
-    # keep track of which components have finished
-    fixation_1Components = [polygon_3]
-    for thisComponent in fixation_1Components:
-        if hasattr(thisComponent, 'status'):
-            thisComponent.status = NOT_STARTED
-    
-    # -------Start Routine "fixation_1"-------
-    while continueRoutine and routineTimer.getTime() > 0:
-        # get current time
-        t = fixation_1Clock.getTime()
-        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-        # update/draw components on each frame
-        
-        # *polygon_3* updates
-        if t >= 0.0 and polygon_3.status == NOT_STARTED:
-            # keep track of start time/frame for later
-            polygon_3.tStart = t
-            polygon_3.frameNStart = frameN  # exact frame index
-            polygon_3.setAutoDraw(True)
-        frameRemains = 0.0 + 0.5- win.monitorFramePeriod * 0.75  # most of one frame period left
-        if polygon_3.status == STARTED and t >= frameRemains:
-            polygon_3.setAutoDraw(False)
-        
-        # check if all components have finished
-        if not continueRoutine:  # a component has requested a forced-end of Routine
-            break
-        continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in fixation_1Components:
-            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                continueRoutine = True
-                break  # at least one component has not yet finished
-        
-        # check for quit (the Esc key)
-        if endExpNow or event.getKeys(keyList=["escape"]):
-            core.quit()
-        
-        # refresh the screen
-        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()
-    
-    # -------Ending Routine "fixation_1"-------
-    for thisComponent in fixation_1Components:
-        if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)
-    thisExp.nextEntry()
-    
-# completed 1 repeats of 'trials'
+ # completed 1 repeats of 'trials'
 
 
 # ------Prepare to start Routine "end"-------

@@ -79,9 +79,9 @@ fixationClock = core.Clock()
 fixationPoint = visual.Circle(win=win, radius=35, units='pix',lineWidth=1, 
     lineColor=[-1,-1,-1], fillColor=[1,1,1], fillColorSpace='rgb',
     opacity=1, depth=0.0, interpolate=True)
-mouse = event.Mouse(win=win)
+fixationMouse = event.Mouse(win=win)
 x, y = [None, None]
-mouse.mouseClock = core.Clock()
+fixationMouse.mouseClock = core.Clock()
 msg = visual.TextStim(win, text='', pos=(0, 0), color="black")
 
 # Initialize components for Routine "trial"
@@ -114,9 +114,9 @@ text_2 = visual.TextStim(win=win, name='text_2',
     color='white', colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-3.0);
-mouse_2 = event.Mouse(win=win)
+probeMouse = event.Mouse(win=win)
 x, y = [None, None]
-mouse_2.mouseClock = core.Clock()
+probeMouse.mouseClock = core.Clock()
 
 # Initialize components for Routine "delay"
 delayClock = core.Clock()
@@ -149,9 +149,9 @@ instructionsClock.reset()  # clock
 frameN = -1
 continueRoutine = True
 # update component parameters for each repeat
-key_resp_2 = event.BuilderKeyResponse()
+instructionsKeys = event.BuilderKeyResponse()
 # keep track of which components have finished
-instructionsComponents = [text, key_resp_2]
+instructionsComponents = [text, instructionsKeys]
 for thisComponent in instructionsComponents:
     if hasattr(thisComponent, 'status'):
         thisComponent.status = NOT_STARTED
@@ -170,24 +170,24 @@ while continueRoutine:
         text.frameNStart = frameN  # exact frame index
         text.setAutoDraw(True)
     
-    # *key_resp_2* updates
-    if t >= 0.0 and key_resp_2.status == NOT_STARTED:
+    # *instructionsKeys* updates
+    if t >= 0.0 and instructionsKeys.status == NOT_STARTED:
         # keep track of start time/frame for later
-        key_resp_2.tStart = t
-        key_resp_2.frameNStart = frameN  # exact frame index
-        key_resp_2.status = STARTED
+        instructionsKeys.tStart = t
+        instructionsKeys.frameNStart = frameN  # exact frame index
+        instructionsKeys.status = STARTED
         # keyboard checking is just starting
-        win.callOnFlip(key_resp_2.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(instructionsKeys.clock.reset)  # t=0 on next screen flip
         event.clearEvents(eventType='keyboard')
-    if key_resp_2.status == STARTED:
+    if instructionsKeys.status == STARTED:
         theseKeys = event.getKeys()
         
         # check for quit:
         if "escape" in theseKeys:
             endExpNow = True
         if len(theseKeys) > 0:  # at least one key was pressed
-            key_resp_2.keys = theseKeys[-1]  # just the last key pressed
-            key_resp_2.rt = key_resp_2.clock.getTime()
+            instructionsKeys.keys = theseKeys[-1]  # just the last key pressed
+            instructionsKeys.rt = instructionsKeys.clock.getTime()
             # a response ends the routine
             continueRoutine = False
     
@@ -213,11 +213,12 @@ for thisComponent in instructionsComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
 # check responses
-if key_resp_2.keys in ['', [], None]:  # No response was made
-    key_resp_2.keys=None
-thisExp.addData('key_resp_2.keys',key_resp_2.keys)
-if key_resp_2.keys != None:  # we had a response
-    thisExp.addData('key_resp_2.rt', key_resp_2.rt)
+if instructionsKeys.keys in ['', [], None]:  # No response was made
+    instructionsKeys.keys=None
+thisExp.addData('instructionsKeys.keys',instructionsKeys.keys)
+if instructionsKeys.keys != None:  # we had a response
+    thisExp.addData('instructionsKeys.rt', instructionsKeys.rt)
+thisExp.addData('routine', 'instructions')
 thisExp.nextEntry()
 # the Routine "instructions" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
@@ -252,7 +253,7 @@ for thisTrial in trials:
     # setup some python lists for storing info about the mouse
     gotValidClick = False  # until a click is received
     # keep track of which components have finished
-    fixationComponents = [fixationPoint, mouse, msg]
+    fixationComponents = [fixationPoint, fixationMouse, msg]
     for thisComponent in fixationComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
@@ -294,10 +295,10 @@ for thisTrial in trials:
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
             
-        if fixationPoint.contains(mouse) and fixationStart == 0.0:
+        if fixationPoint.contains(fixationMouse) and fixationStart == 0.0:
             fixationStart = fixationClock.getTime()
             #msg.text = 'inside %1.1f' % totalFixationTime
-        elif fixationPoint.contains(mouse) and fixationStart > 0.0:
+        elif fixationPoint.contains(fixationMouse) and fixationStart > 0.0:
             #msg.text = 'inside %1.1f' % totalFixationTime
             totalFixationTime = fixationClock.getTime() - fixationStart
             if totalFixationTime >= 1.0:
@@ -305,7 +306,7 @@ for thisTrial in trials:
                 fixationStart == 0.0
                 totalFixationTime = 0.0
                 fixationClock.reset()
-        elif not fixationPoint.contains(mouse):
+        elif not fixationPoint.contains(fixationMouse):
             fixationStart == 0.0
             totalFixationTime = 0.0
             fixationClock.reset()  # clock
@@ -317,16 +318,10 @@ for thisTrial in trials:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     # store data for thisExp (ExperimentHandler)
-    x, y = mouse.getPos()
-    buttons = mouse.getPressed()
-    mouse.time = mouse.mouseClock.getTime()
-    thisExp.addData('mouse.x', x)
-    thisExp.addData('mouse.y', y)
-    thisExp.addData('mouse.leftButton', buttons[0])
-    thisExp.addData('mouse.midButton', buttons[1])
-    thisExp.addData('mouse.rightButton', buttons[2])
-    thisExp.addData('mouse.time', mouse.time)
-    thisExp.nextEntry()
+    x, y = fixationMouse.getPos()
+    buttons = fixationMouse.getPressed()
+    fixationMouse.time = fixationMouse.mouseClock.getTime()
+    thisExp.addData('fixationMouse.time', fixationMouse.time)
     # the Routine "fixation" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
 
@@ -342,11 +337,11 @@ for thisTrial in trials:
     image.setImage(Picture1)
     image_2.setImage(Picture2)
     polygon.setPos(Locations)
-    # setup some python lists for storing info about the mouse_2
+    # setup some python lists for storing info about the probeMouse
     gotValidClick = False  # until a click is received
-    mouse_2.mouseClock.reset()
+    probeMouse.mouseClock.reset()
     # keep track of which components have finished
-    trialComponents = [image, image_2, polygon, text_2, mouse_2]
+    trialComponents = [image, image_2, polygon, text_2, probeMouse]
     for thisComponent in trialComponents:
         if hasattr(thisComponent, 'status'):
             thisComponent.status = NOT_STARTED
@@ -412,10 +407,10 @@ for thisTrial in trials:
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
          
-        if polygon.contains(mouse) and fixationStart == 0.0:
+        if polygon.contains(probeMouse) and fixationStart == 0.0:
             #msg.text = 'inside %1.1f' % totalFixationTime
             fixationStart = fixationClock.getTime()
-        elif polygon.contains(mouse) and fixationStart > 0.0:
+        elif polygon.contains(probeMouse) and fixationStart > 0.0:
             #msg.text = 'inside %1.1f' % totalFixationTime
             totalFixationTime = fixationClock.getTime() - fixationStart
             if totalFixationTime >= 1.0:
@@ -423,7 +418,7 @@ for thisTrial in trials:
                 fixationStart == 0.0
                 totalFixationTime = 0.0
                 fixationClock.reset()
-        elif not polygon.contains(mouse):
+        elif not polygon.contains(probeMouse):
             fixationStart == 0.0
             totalFixationTime = 0.0
             fixationClock.reset()  # clock
@@ -433,16 +428,18 @@ for thisTrial in trials:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     # store data for trials (TrialHandler)
-    x, y = mouse_2.getPos()
-    buttons = mouse_2.getPressed()
-    mouse_2.time = mouse_2.mouseClock.getTime()
-    trials.addData('mouse_2.x', x)
-    trials.addData('mouse_2.y', y)
-    trials.addData('mouse_2.leftButton', buttons[0])
-    trials.addData('mouse_2.midButton', buttons[1])
-    trials.addData('mouse_2.rightButton', buttons[2])
-    trials.addData('mouse_2.time', mouse_2.time)
+    x, y = probeMouse.getPos()
+    buttons = probeMouse.getPressed()
+    probeMouse.time = probeMouse.mouseClock.getTime()
+    trials.addData('routine', "trial")
+    trials.addData('probeMouse.x', x)
+    trials.addData('probeMouse.y', y)
+    trials.addData('probeMouse.leftButton', buttons[0])
+    trials.addData('probeMouse.midButton', buttons[1])
+    trials.addData('probeMouse.rightButton', buttons[2])
+    trials.addData('probeMouse.time', probeMouse.time)
     # the Routine "trial" was not non-slip safe, so reset the non-slip timer
+    thisExp.nextEntry()
     routineTimer.reset()
     
     # ------Prepare to start Routine "delay"-------
@@ -575,6 +572,7 @@ if key_resp_3.keys in ['', [], None]:  # No response was made
 thisExp.addData('key_resp_3.keys',key_resp_3.keys)
 if key_resp_3.keys != None:  # we had a response
     thisExp.addData('key_resp_3.rt', key_resp_3.rt)
+thisExp.addData('routine', 'end')
 thisExp.nextEntry()
 # the Routine "end" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()

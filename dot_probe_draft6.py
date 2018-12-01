@@ -224,7 +224,7 @@ thisExp.nextEntry()
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-trials = data.TrialHandler(nReps=1, method='random', 
+trials = data.TrialHandler(nReps=1, method='fullRandom', 
     extraInfo=expInfo, originPath=-1,
     trialList=data.importConditions('conditions.xlsx'),
     seed=None, name='trials')
@@ -294,7 +294,7 @@ for thisTrial in trials:
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-            
+        
         if fixationPoint.contains(fixationMouse) and fixationStart == 0.0:
             fixationStart = fixationClock.getTime()
             #msg.text = 'inside %1.1f' % totalFixationTime
@@ -336,7 +336,7 @@ for thisTrial in trials:
     image.setPos([-0.4, 0])
     image.setImage(Picture1)
     image_2.setImage(Picture2)
-    polygon.setPos(Locations)
+    polygon.setPos(probeCoords)
     # setup some python lists for storing info about the probeMouse
     gotValidClick = False  # until a click is received
     probeMouse.mouseClock.reset()
@@ -406,7 +406,16 @@ for thisTrial in trials:
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-         
+        
+        # This chunk of code stores the x, y coordinates of the mouse
+        # during the probe routine
+        probe_x, probe_y = probeMouse.getPos()
+        thisExp.addData('probeMouse.x', probe_x)
+        thisExp.addData('probeMouse.y', probe_y)
+        thisExp.addData('probeMouse.t', fixationClock.getTime())
+        trials.addData('routine', "trial")
+        thisExp.nextEntry()
+        
         if polygon.contains(probeMouse) and fixationStart == 0.0:
             #msg.text = 'inside %1.1f' % totalFixationTime
             fixationStart = fixationClock.getTime()
@@ -432,11 +441,6 @@ for thisTrial in trials:
     buttons = probeMouse.getPressed()
     probeMouse.time = probeMouse.mouseClock.getTime()
     trials.addData('routine', "trial")
-    trials.addData('probeMouse.x', x)
-    trials.addData('probeMouse.y', y)
-    trials.addData('probeMouse.leftButton', buttons[0])
-    trials.addData('probeMouse.midButton', buttons[1])
-    trials.addData('probeMouse.rightButton', buttons[2])
     trials.addData('probeMouse.time', probeMouse.time)
     # the Routine "trial" was not non-slip safe, so reset the non-slip timer
     thisExp.nextEntry()

@@ -412,7 +412,7 @@ for thisTrial in trials:
         probe_x, probe_y = probeMouse.getPos()
         thisExp.addData('probeMouse.x', probe_x)
         thisExp.addData('probeMouse.y', probe_y)
-        thisExp.addData('probeMouse.t', fixationClock.getTime())
+        thisExp.addData('probeMouse.t', probeMouse.mouseClock.getTime())
         trials.addData('routine', "trial")
         thisExp.nextEntry()
         
